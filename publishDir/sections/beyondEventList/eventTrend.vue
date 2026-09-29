@@ -113,9 +113,7 @@ const chartOption = ref({
     seriesData: [],
     units: [],
     markLine: [],
-    xAxisHighlightArea: [],
-    min: null,
-    max: null
+    xAxisHighlightArea: []
 });
 
 // 控制显隐
@@ -164,9 +162,6 @@ const getTrend = async row => {
         }
     });
     // chartOption.value.xAxisHighlightArea = Array.from(new Set(xAxisHighlightArea));
-    const allValues = [...trendData.values.map(n => n.value), hLimit, hhLimit, hhhLimit].filter(n => ![null, undefined, NaN, ''].includes(n));
-    chartOption.value.min = Math.round(Math.min(...allValues) - 10);
-    chartOption.value.max = Math.round(Math.max(...allValues) + 10);
     await Promise.resolve();
     chartRef.value?.renderChart();
 };

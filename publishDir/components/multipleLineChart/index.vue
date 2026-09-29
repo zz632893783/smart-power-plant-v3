@@ -42,10 +42,10 @@ const props = defineProps({
         default: () => []
     },
     /**
-     * @description 系列数据
+     * @description 系列数据，可用 yAxisIndex 指定该条折线对应的 y 轴（从 0 开始）
      * @example [
-     *     [120, 132, 101, 134, 190, 230, 218],
-     *     [110, 118, 122, 130, 145, 150, 148]
+     *     { data: [120, 132, 101, 134, 190, 230, 218], yAxisIndex: 0 },
+     *     { data: [110, 118, 122, 130, 145, 150, 148], yAxisIndex: 1 }
      * ]
      */
     seriesData: {
@@ -61,8 +61,8 @@ const props = defineProps({
         default: () => ({ top: 20, left: 30, right: 20, bottom: 50 })
     },
     /**
-     * @description y轴单位
-     * @example ['%', '千瓦时']
+     * @description 各 y 轴对应的单位（用于 tooltip 数值，按下标与 y 轴对应）
+     * @example ['MW', '℃']
      */
     units: {
         type: [Array],
@@ -104,20 +104,20 @@ const props = defineProps({
         default: () => []
     },
     /**
-     * @description 高亮区域的索引
-     * @example [2, 4]
+     * @description 高亮区域的颜色
+     * @example 'rgba(253, 226, 226, 1)'
      */
     xAxisHighlightAreaColor: {
         type: [String],
-        default: () => 'rgb(253, 226, 226)'
+        default: () => 'rgba(253, 226, 226, 1)'
     },
     /**
-     * @description y轴单位
-     * @example ['亿元', '%']
+     * @description 各 y 轴的名称（显示在坐标轴旁，按下标与 y 轴对应）
+     * @example ['负荷(MW)', '温度(℃)']
      */
-    yAxisName: {
-        type: [String, Array],
-        default: () => ['']
+    yAxisNames: {
+        type: [Array],
+        default: () => []
     },
     /**
      * @description 图表缩放比例
@@ -146,14 +146,6 @@ const props = defineProps({
     afterSetOption: {
         type: [Function],
         default: () => null
-    },
-    min: {
-        type: [Number],
-        default: () => null
-    },
-    max: {
-        type: [Number],
-        default: () => null
     }
 });
 // legend 图标映射
@@ -175,6 +167,43 @@ const renderChart = () => {
     chart = echarts.init(chartRef.value);
 
     const grid = ['top', 'right', 'bottom', 'left'].reduce((x, k) => ({ ...x, [k]: props.grid[k] || defaultGrid[k] }), {});
+    // 真实 y 轴数量：由 seriesData 中出现过的最大 yAxisIndex 推断（未指定则只有 1 个 y 轴）
+    const seriesMaxYAxisIndex = props.seriesData.reduce((x, n) => Math.max(x, n.yAxisIndex || 0), 0);
+    const yAxisCount = Math.max(1, seriesMaxYAxisIndex + 1);
+    // 真实 y 轴：第 0 个在左侧，其余在右侧
+    const yAxis = new Array(yAxisCount).fill().map((_, i) => ({
+        type: 'value',
+        position: i === 0 ? 'left' : 'right',
+        offset: i >= 2 ? (i - 1) * 45 : 0,
+        // 多轴时与上一个轴对齐刻度，保证网格线一致
+        alignTicks: i > 0,
+        name: props.yAxisNames[i] || '',
+        nameTextStyle: { fontSize: 14, fontWeight: 400 },
+        splitNumber: 4,
+        // 只在第 0 个轴显示网格线，避免多轴重复
+        splitLine: {
+            show: i === 0,
+            lineStyle: {
+                width: 0.5
+            }
+        },
+        axisLabel: {
+            fontSize: 14,
+            fontWeight: 400,
+            lineHeight: 12
+        }
+    }));
+    // 末尾追加一个隐藏 y 轴，仅用于绘制区域高亮的背景条
+    // 固定为 [0, 1] 区间，高亮条取值 1，保证无论其他轴如何缩放都能铺满绘图区
+    yAxis.push({
+        type: 'value',
+        min: 0,
+        max: 1,
+        axisLabel: { show: false },
+        axisLine: { show: false },
+        axisTick: { show: false },
+        splitLine: { show: false }
+    });
     const option = {
         grid,
         legend: {
@@ -217,9 +246,9 @@ const renderChart = () => {
                                     // const colors = props.tooltipColors || props.itemColors;
                                     // const color = colors[n.seriesIndex % colors.length];
                                     const color = props.color[i % props.color.length];
-                                    const yAxisName = typeof props.yAxisName === 'string' ? [props.yAxisName] : props.yAxisName;
+                                    // tooltip 单位按该条折线所属的 y 轴取 units 中对应下标的单位
                                     const yAxisIndex = props.seriesData[n.seriesIndex]?.yAxisIndex || 0;
-                                    const unit = yAxisName[yAxisIndex % yAxisName.length] || '';
+                                    const unit = props.units[yAxisIndex] || '';
                                     const svgPath = legendIconMap.line.replace('path://', '').replace(/(?<!(a|A)(-?\d+(\.\d+)?,){3,4})-?\d+(\.\d+)?/g, s => s * props.scale);
                                     return `
                                         <i style="height: ${ 16 * props.scale }px; position: relative; overflow: hidden;">
@@ -268,35 +297,10 @@ const renderChart = () => {
                 axisLabel: { show: false }
             }
         ],
-        yAxis: [
-            {
-                type: 'value',
-                splitNumber: 4,
-                splitLine: {
-                    lineStyle: {
-                        width: 0.5
-                        // color: 'rgba(255, 255, 255, .5)'
-                    }
-                },
-                axisLabel: {
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: 12
-                    // color: 'rgba(255, 255, 255, 1)'
-                },
-                min: props.min || null,
-                max: props.max || null,
-            },
-            {
-                type: 'value',
-                alignTicks: true,
-                min: props.min || null,
-                max: props.max || null,
-                axisLabel: { show: false },
-                splitLine: { show: false }
-            }
-        ],
+        yAxis,
         series: (() => {
+            // 记录已挂载过标线的 y 轴，保证同一标线在同一个轴上只渲染一次
+            const markLineAttachedAxes = new Set();
             const series = props.seriesData.map((seriesItem, seriesIndex) => {
                 const colorName = props.color[seriesIndex % props.color.length];
                 // const type = seriesItem.type || 'bar';
@@ -304,6 +308,7 @@ const renderChart = () => {
                     type: 'line',
                     name: props.legendNames[seriesIndex % props.legendNames.length] || '',
                     data: seriesItem.data || [],
+                    // 通过 yAxisIndex 指定该条折线对应的 y 轴（默认第 0 个）
                     yAxisIndex: seriesItem.yAxisIndex || 0
                 };
                 seriesOption.smooth = props.smooth;
@@ -334,34 +339,36 @@ const renderChart = () => {
                 //     origin: 'start',
                 //     color: colorMap[colorName]?.lineArea
                 // });
-                const markLines = props.markLine.filter(n => (n.yAxisIndex || 0) === seriesOption.yAxisIndex);
-                markLines.length && (seriesOption.markLine = {
-                    symbol:'none',
-                    silent: true,
-                    data: markLines.map(n => ({
-                        yAxis: n.value,
-                        lineStyle: { color: n.color, type: n.type }
-                    })),
-                    label: { show: false }
-                });
+                // 标线按 yAxisIndex 对齐到对应 y 轴，且每个轴上只挂载一次
+                if (!markLineAttachedAxes.has(seriesOption.yAxisIndex)) {
+                    const markLines = props.markLine.filter(n => (n.yAxisIndex || 0) === seriesOption.yAxisIndex);
+                    if (markLines.length) {
+                        markLineAttachedAxes.add(seriesOption.yAxisIndex);
+                        seriesOption.markLine = {
+                            symbol: 'none',
+                            silent: true,
+                            data: markLines.map(n => ({
+                                yAxis: n.value,
+                                lineStyle: { color: n.color, type: n.type }
+                            })),
+                            label: { show: false }
+                        };
+                    }
+                }
                 return seriesOption;
             });
             series.push({
                 type: 'bar',
                 barWidth: '100%',
                 barGap: 0,
-                yAxisIndex: (typeof props.yAxisName === 'string' || (props.yAxisName instanceof Array && props.yAxisName.length === 1)) ? 1 : 2,
+                // 高亮背景条使用末尾追加的隐藏 y 轴
+                yAxisIndex: yAxisCount,
                 xAxisIndex: 1,
                 showBackground: false,
                 label: { show: false },
                 data: props.xAxisData.map((n, i) => ({
-                    value: (() => {
-                        if (![null, undefined, NaN, ''].includes(props.max)) {
-                            return props.max;
-                        }
-                        const allValues = props.seriesData.reduce((x, y) => [...x, ...y.data], []);
-                        return Math.max(...allValues);
-                    })(),
+                    // 隐藏轴固定为 [0, 1]，取值 1 即可铺满绘图区高度
+                    value: 1,
                     itemStyle: {
                         // color: props.xAxisHighlightArea.includes(i) ? 'rgba(14, 143, 255, 0.2)' : 'transparent'
                         color: props.xAxisHighlightArea.includes(i) ? props.xAxisHighlightAreaColor : 'transparent'

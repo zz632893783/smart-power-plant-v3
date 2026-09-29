@@ -113,7 +113,7 @@
             <local-field-width-control
                 class="mr-3"
                 ref="fieldControlRef"
-                unique-name="beyondEventList"
+                :unique-name="sectionUniqueName"
                 v-model="visibleFieldProps"
                 :options="columns.map(column => ({
                     prop: column.prop,
@@ -140,10 +140,10 @@
         <!-- 列表 -->
         <div class="grid grid-rows-1 mt-4 px-4">
             <el-table
+                border
                 height="auto"
                 :data="tableData.list"
                 header-cell-class-name="!bg-[#f5f7fa]"
-                border
                 class="
                     before:hidden! after:hidden!
                     [&_.el-table\_\_border-left-patch]:hidden [&_.el-table\_\_inner-wrapper]:after:hidden
@@ -207,11 +207,11 @@
             <span class="text-sm">共{{ tableData.total }}条</span>
             <el-pagination
                 background
-                v-model:page-size="queryBody.limit"
-                :page-sizes="[20, 50, 100]"
-                layout="sizes, prev, pager, next"
                 :total="tableData.total"
                 @change="n => getList(n)"
+                :page-sizes="[20, 50, 100]"
+                layout="sizes, prev, pager, next"
+                v-model:page-size="queryBody.limit"
                 v-model:current-page="queryBody.page"
             />
         </div>
@@ -240,6 +240,14 @@ const props = defineProps({
     baseURL: {
         type: String,
         default: () => 'http://192.168.10.100:8080/'
+    },
+    /**
+     * @description 模块名称
+     * @example 'beyondEventList'
+     */
+    sectionUniqueName: {
+        type: String,
+        default: () => 'beyondEventList'
     }
 });
 
