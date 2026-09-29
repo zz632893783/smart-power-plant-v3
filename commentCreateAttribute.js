@@ -46,18 +46,18 @@ import fs from 'fs';
                 '<template>',
                 '    <div class="border-t border-l">',
             `            <div class="grid grid-cols-5">`,
-            '                <div class="p-4 border-r border-b">属性名</div>',
-            '                <div class="p-4 border-r border-b">说明</div>',
-            '                <div class="p-4 border-r border-b">类型</div>',
-            '                <div class="p-4 border-r border-b">默认值</div>',
-            '                <div class="p-4 border-r border-b">参考值</div>',
+            '                <div class="p-4 border-r border-b text-sm">属性名</div>',
+            '                <div class="p-4 border-r border-b text-sm">说明</div>',
+            '                <div class="p-4 border-r border-b text-sm">类型</div>',
+            '                <div class="p-4 border-r border-b text-sm">默认值</div>',
+            '                <div class="p-4 border-r border-b text-sm">参考值</div>',
             '            </div>',
             ];
             rows.forEach(row => {
                 writeContent.push(`            <div class="grid grid-cols-5">`);
                 // 遍历每个属性的属性名，说明，类型，默认值，参考值字段
                 ['attrName', 'description', 'type', 'defaultValue', 'example'].forEach(key => {
-                    writeContent.push('                <div class="p-4 border-r border-b">');
+                    writeContent.push('                <div class="p-4 border-r border-b text-sm">');
                     // 对单元格中内容缩进格式的处理
                     const cellContent = row[key].trim().replace(/\n( +)/g, (m, c) => `<br/>${ new Array(c.length - 1).fill('&nbsp;').join('') }`);
                     writeContent.push(`                    ${ cellContent }`);

@@ -1,6 +1,6 @@
 ## 1.基础用法
 
-<div class="demo-scope"><demo521e7d4ba2c6 /></div>
+<div class="demo-scope"><demo14c40ae7178c /></div>
 
 ```vue{4}
 <template>
@@ -18,9 +18,9 @@
 ```
 ## 属性
 
-<div class="demo-scope"><demoe7b21147f1cc /></div>
+<div class="demo-scope"><demo71c27cfd72de /></div>
 
 <script setup>
-import demo521e7d4ba2c6 from '../../../document/components/fileIcon/1.基础用法.vue'
-import demoe7b21147f1cc from '../../../document/components/fileIcon/属性.vue'
+import demo14c40ae7178c from '../../../document/components/fileIcon/1.基础用法.vue'
+import demo71c27cfd72de from '../../../document/components/fileIcon/属性.vue'
 </script>
