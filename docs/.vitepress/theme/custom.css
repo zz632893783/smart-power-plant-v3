@@ -1,0 +1,239 @@
+/* 文档站布局微调：压缩两侧、把空间让给中间正文。
+   VitePress 默认主题的宽度没有配置项，只能在此覆盖（组件样式为 scoped，故用 !important）。 */
+
+/* 左侧导航：272px -> 220px */
+:root {
+  --vp-sidebar-width: 220px;
+}
+
+/* 中间正文：默认被限制在 688px -> 900px */
+.VPDoc.has-aside .content-container {
+  max-width: 900px !important;
+}
+
+/* 右侧目录：外层 256px -> 192px，内层固定 224px -> 168px（192 - 24 的左内边距） */
+.VPDoc .aside {
+  max-width: 192px !important;
+  padding-left: 24px !important;
+}
+
+.VPDoc .aside-container,
+.VPDoc .aside-curtain {
+  width: 168px !important;
+}
+
+/* ==========================================================================
+   demo 作用域内的样式重置
+   --------------------------------------------------------------------------
+   目的：让文档里的 demo 呈现与"发布后在其他项目中使用"一致的样式，即
+   Tailwind preflight 生效，且不被 VitePress 的正文排版（.vp-doc h4 / p / table ...）影响。
+
+   背景：Tailwind v4 的 preflight 位于 @layer base，而 VitePress 的正文排版在
+   @layer vendor（由 postcss.config.js 包进来），vendor 高于 base，所以 preflight 压不过它。
+   因此在 demo-reset 层（位于 vendor 之上、utilities 之下）重放一份 preflight 副本：
+     - 高于 vendor  => 能覆盖 VitePress 的正文排版
+     - 低于 utilities => demo 里手写的工具类仍能正常覆盖它
+
+   取值与 node_modules/tailwindcss/preflight.css 对齐。
+   ========================================================================== */
+@layer demo-reset {
+  /* 1) 先把 demo 子树回退到浏览器默认值，自动清掉 VitePress 正文排版加上的属性
+        （h4 的 line-height、table 的 display:block 等），无需逐条列举。
+        用 :where() 把特异性压到 0，方便下面的 preflight 副本覆盖它。
+
+        必须排除 svg 子树：SVG2 中 d / fill / stroke 等几何属性同样是 CSS 属性，
+        all 会连它们一起重置。d 被重置成 none 后 <path> 就不再绘制，
+        表现为图标/图表"消失"——元素还在、尺寸也正常，就是画不出来。
+        （Element Plus 图标、ECharts 的 SVG 渲染都会中招）
+
+        必须排除 col / colgroup：Element Plus 的列宽是靠 <col> 的 HTML width 属性
+        （presentational hint）指定的，它不是 CSS 声明、优先级最低，all: revert 会
+        直接跨过它把 width 回退成 auto，导致 el-table 完全忽略列宽、退化成按内容排布，
+        表现为"拖动列宽后列表毫无变化"。col 上没有别的样式需要重置，排除掉即可。 */
+  :where(.demo-scope, .demo-scope *):not(:where(svg, svg *)):not(:where(col, colgroup)) {
+    all: revert;
+  }
+
+  /* 2) 重建 preflight 中"与浏览器默认值不同"的部分 */
+
+  /* 对应 preflight 的 html/:host：demo 会继承 html 上的行高与字体，需要在这里重新立起来 */
+  .demo-scope {
+    line-height: 1.5;
+    tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+    font-family: var(
+      --default-font-family,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      'Noto Sans',
+      Arial,
+      sans-serif
+    );
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .demo-scope *,
+  .demo-scope ::after,
+  .demo-scope ::before,
+  .demo-scope ::backdrop,
+  .demo-scope ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  .demo-scope h1,
+  .demo-scope h2,
+  .demo-scope h3,
+  .demo-scope h4,
+  .demo-scope h5,
+  .demo-scope h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  .demo-scope a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+
+  .demo-scope b,
+  .demo-scope strong {
+    font-weight: bolder;
+  }
+
+  .demo-scope ol,
+  .demo-scope ul,
+  .demo-scope menu {
+    list-style: none;
+  }
+
+  .demo-scope small {
+    font-size: 80%;
+  }
+
+  .demo-scope sub,
+  .demo-scope sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  .demo-scope sub {
+    bottom: -0.25em;
+  }
+
+  .demo-scope sup {
+    top: -0.5em;
+  }
+
+  .demo-scope table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .demo-scope hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+
+  .demo-scope abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+
+  .demo-scope img,
+  .demo-scope svg,
+  .demo-scope video,
+  .demo-scope canvas,
+  .demo-scope audio,
+  .demo-scope iframe,
+  .demo-scope embed,
+  .demo-scope object {
+    display: block;
+    vertical-align: middle;
+  }
+
+  .demo-scope img,
+  .demo-scope video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .demo-scope code,
+  .demo-scope kbd,
+  .demo-scope samp,
+  .demo-scope pre {
+    font-family: var(
+      --default-mono-font-family,
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      'Liberation Mono',
+      'Courier New',
+      monospace
+    );
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+
+  .demo-scope button,
+  .demo-scope input,
+  .demo-scope select,
+  .demo-scope optgroup,
+  .demo-scope textarea,
+  .demo-scope ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+
+  .demo-scope :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+
+  .demo-scope :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+
+  .demo-scope ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+
+  .demo-scope ::placeholder {
+    opacity: 1;
+  }
+
+  .demo-scope textarea {
+    resize: vertical;
+  }
+
+  .demo-scope [hidden]:where(:not([hidden='until-found'])) {
+    display: none !important;
+  }
+
+  /* 表单控件在 Chrome 下应保留可拖拽尺寸的行为，这里不做拦截 */
+  .demo-scope :where(select:is([size])) {
+    vertical-align: baseline;
+  }
+}

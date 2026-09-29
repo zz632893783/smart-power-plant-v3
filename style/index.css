@@ -1,0 +1,23 @@
+/* 层序声明：必须出现在所有 @layer 块之前（层序由第一处出现决定，所以这个文件要最先被引入）。
+   - vendor      VitePress 主题样式（由 postcss.config.js 包进来），压在 Tailwind 之下
+   - demo-reset  demo 区域内的 preflight 副本：要高于 vendor（文档正文排版），
+                 但低于 utilities（demo 里的工具类仍要能覆盖它） */
+@layer properties, theme, base, vendor, demo-reset, components, utilities;
+
+@import "tailwindcss";
+
+/* v4 不再读取 tailwind.config.js 的 content 白名单，而是自动扫描整个项目（遵循 .gitignore）。
+   这里把生成的产物/缓存目录排除，避免把历史产物里的类名也打进文档样式 */
+@source not "../publishDir";
+@source not "../docs/.vitepress/cache";
+
+/* 保持 v3 的默认边框颜色（v4 默认改为 currentColor），避免存量样式外观发生变化 */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}

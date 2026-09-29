@@ -1,0 +1,37 @@
+{
+  "name": "smart-power-plant-v3",
+  "version": "0.0.16",
+  "type": "module",
+  "main": "index.js",
+  "keyword": "smart-power-plant-v3",
+  "scripts": {
+    "build": "node handleExport.js",
+    "docs:build": "node commentCreateAttribute.js && node handleDirectory.js && node copyReadme.js && node handleExport.js && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "doc": "node commentCreateAttribute.js && node handleDirectory.js && node handleExport.js && vitepress dev docs",
+    "publish:public": "node publish.js public updateVersion && cd ./publishDir && npm publish --registry=https://registry.npmjs.org",
+    "publish:private": "node publish.js private && cd ./publishDir && npm publish --registry=http://10.10.120.191:8081/repository/npm-private/",
+    "publish": "npm run publish:public && npm run publish:private"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "axios": "^1.20.0",
+    "echarts": "^5.5.0",
+    "lodash": "^4.18.1",
+    "object-hash": "^3.0.0",
+    "sass": "^1.71.1",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "element-plus": "^2.13.6",
+    "flexsearch": "^0.7.43",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4",
+    "vite": "^4.4.5",
+    "vitepress": "^1.0.0-rc.45",
+    "vitepress-plugin-search": "^1.0.4-alpha.22",
+    "vue-router": "^4.3.0"
+  }
+}

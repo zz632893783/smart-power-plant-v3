@@ -1,0 +1,11 @@
+{
+  "name": "smart-power-plant-v3",
+  "version": "0.0.16",
+  "type": "module",
+  "main": "index.js",
+  "keyword": "smart-power-plant-v3",
+  "dependencies": {
+    "echarts": "^5.5.0",
+    "sass": "^1.71.1"
+  }
+}
