@@ -1,6 +1,6 @@
 ## 1.基础用法
 
-<div class="demo-scope"><demobee8c914c5c9 /></div>
+<div class="demo-scope"><demofa7ff70dd3b0 /></div>
 
 ```vue{4}
 <template>
@@ -43,9 +43,9 @@ onMounted(() => {
 ```
 ## 属性
 
-<div class="demo-scope"><demo277711c0a5d4 /></div>
+<div class="demo-scope"><demo179ed814fccf /></div>
 
 <script setup>
-import demobee8c914c5c9 from '../../../document/components/localFieldWidthControl/1.基础用法.vue'
-import demo277711c0a5d4 from '../../../document/components/localFieldWidthControl/属性.vue'
+import demofa7ff70dd3b0 from '../../../document/components/localFieldWidthControl/1.基础用法.vue'
+import demo179ed814fccf from '../../../document/components/localFieldWidthControl/属性.vue'
 </script>

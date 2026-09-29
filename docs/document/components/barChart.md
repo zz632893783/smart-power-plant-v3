@@ -1,6 +1,6 @@
 ## 1.基础用法
 
-<div class="demo-scope"><demo699ce6e4c41b /></div>
+<div class="demo-scope"><demo2114d4474ac6 /></div>
 
 ```vue{4}
 <template>
@@ -37,7 +37,7 @@ onMounted(() => chartRef.value.renderChart());
 ```
 ## 2.指定区域高亮
 
-<div class="demo-scope"><demobc05ca7c5955 /></div>
+<div class="demo-scope"><demo2cc949cba2b5 /></div>
 
 ```vue{4}
 <template>
@@ -76,7 +76,7 @@ onMounted(() => chartRef.value.renderChart());
 ```
 ## 3.拖拽区域为滚动条
 
-<div class="demo-scope"><democaad7f931e7a /></div>
+<div class="demo-scope"><demo7333fd9cee6f /></div>
 
 ```vue{4}
 <template>
@@ -116,7 +116,7 @@ onMounted(() => chartRef.value.renderChart());
 ```
 ## 4.将dom元素作为tooltip
 
-<div class="demo-scope"><demoe7a1fe52c633 /></div>
+<div class="demo-scope"><demobc6dd8231344 /></div>
 
 ```vue{4}
 <template>
@@ -181,17 +181,17 @@ onMounted(() => chartRef.value.renderChart());
 ```
 ## 属性
 
-<div class="demo-scope"><demoe9aba4b8d446 /></div>
+<div class="demo-scope"><demo05051412f766 /></div>
 
 ## 支持方法
 
-<div class="demo-scope"><demo7a94475a5b3c /></div>
+<div class="demo-scope"><demo5ae6beda9823 /></div>
 
 <script setup>
-import demo699ce6e4c41b from '../../../document/components/barChart/1.基础用法.vue'
-import demobc05ca7c5955 from '../../../document/components/barChart/2.指定区域高亮.vue'
-import democaad7f931e7a from '../../../document/components/barChart/3.拖拽区域为滚动条.vue'
-import demoe7a1fe52c633 from '../../../document/components/barChart/4.将dom元素作为tooltip.vue'
-import demoe9aba4b8d446 from '../../../document/components/barChart/属性.vue'
-import demo7a94475a5b3c from '../../../document/components/barChart/支持方法.vue'
+import demo2114d4474ac6 from '../../../document/components/barChart/1.基础用法.vue'
+import demo2cc949cba2b5 from '../../../document/components/barChart/2.指定区域高亮.vue'
+import demo7333fd9cee6f from '../../../document/components/barChart/3.拖拽区域为滚动条.vue'
+import demobc6dd8231344 from '../../../document/components/barChart/4.将dom元素作为tooltip.vue'
+import demo05051412f766 from '../../../document/components/barChart/属性.vue'
+import demo5ae6beda9823 from '../../../document/components/barChart/支持方法.vue'
 </script>

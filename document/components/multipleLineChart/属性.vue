@@ -1,5 +1,5 @@
 <!-- 该文件由 commentCreateAttrTable.js 自动生成 -->
-<!-- 创建时间 2026-9-29 11:48:47 -->
+<!-- 创建时间 2026-9-29 13:41:9 -->
 <template>
     <div class="border-t border-l">
             <div class="grid grid-cols-5">
@@ -184,30 +184,30 @@
                     xAxisHighlightAreaColor
                 </div>
                 <div class="p-4 border-r border-b text-sm">
-                    高亮区域的索引
+                    高亮区域的颜色
                 </div>
                 <div class="p-4 border-r border-b text-sm">
                     String
                 </div>
                 <div class="p-4 border-r border-b text-sm">
-                    'rgb(253, 226, 226)'
+                    'rgba(253, 226, 226, 1)'
                 </div>
                 <div class="p-4 border-r border-b text-sm">
-                    [2, 4]
+                    'rgba(253, 226, 226, 1)'
                 </div>
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b text-sm">
-                    yAxisName
+                    yAxisNames
                 </div>
                 <div class="p-4 border-r border-b text-sm">
                     各 y 轴的名称（显示在坐标轴旁，按下标与 y 轴对应）
                 </div>
                 <div class="p-4 border-r border-b text-sm">
-                    String, Array
+                    Array
                 </div>
                 <div class="p-4 border-r border-b text-sm">
-                    ['']
+                    []
                 </div>
                 <div class="p-4 border-r border-b text-sm">
                     ['负荷(MW)', '温度(℃)']

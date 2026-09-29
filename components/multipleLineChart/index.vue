@@ -104,20 +104,20 @@ const props = defineProps({
         default: () => []
     },
     /**
-     * @description 高亮区域的索引
-     * @example [2, 4]
+     * @description 高亮区域的颜色
+     * @example 'rgba(253, 226, 226, 1)'
      */
     xAxisHighlightAreaColor: {
         type: [String],
-        default: () => 'rgb(253, 226, 226)'
+        default: () => 'rgba(253, 226, 226, 1)'
     },
     /**
      * @description 各 y 轴的名称（显示在坐标轴旁，按下标与 y 轴对应）
      * @example ['负荷(MW)', '温度(℃)']
      */
-    yAxisName: {
-        type: [String, Array],
-        default: () => ['']
+    yAxisNames: {
+        type: [Array],
+        default: () => []
     },
     /**
      * @description 图表缩放比例
@@ -167,11 +167,6 @@ const renderChart = () => {
     chart = echarts.init(chartRef.value);
 
     const grid = ['top', 'right', 'bottom', 'left'].reduce((x, k) => ({ ...x, [k]: props.grid[k] || defaultGrid[k] }), {});
-    // 归一化为数组
-    const toArray = v => (Array.isArray(v) ? v : [v]);
-    // 各 y 轴的名称 / 单位
-    const yAxisNames = toArray(props.yAxisName);
-    const yAxisUnits = props.units || [];
     // 真实 y 轴数量：由 seriesData 中出现过的最大 yAxisIndex 推断（未指定则只有 1 个 y 轴）
     const seriesMaxYAxisIndex = props.seriesData.reduce((x, n) => Math.max(x, n.yAxisIndex || 0), 0);
     const yAxisCount = Math.max(1, seriesMaxYAxisIndex + 1);
@@ -182,7 +177,7 @@ const renderChart = () => {
         offset: i >= 2 ? (i - 1) * 45 : 0,
         // 多轴时与上一个轴对齐刻度，保证网格线一致
         alignTicks: i > 0,
-        name: yAxisNames[i] || '',
+        name: props.yAxisNames[i] || '',
         nameTextStyle: { fontSize: 14, fontWeight: 400 },
         splitNumber: 4,
         // 只在第 0 个轴显示网格线，避免多轴重复
@@ -253,7 +248,7 @@ const renderChart = () => {
                                     const color = props.color[i % props.color.length];
                                     // tooltip 单位按该条折线所属的 y 轴取 units 中对应下标的单位
                                     const yAxisIndex = props.seriesData[n.seriesIndex]?.yAxisIndex || 0;
-                                    const unit = yAxisUnits[yAxisIndex] || '';
+                                    const unit = props.units[yAxisIndex] || '';
                                     const svgPath = legendIconMap.line.replace('path://', '').replace(/(?<!(a|A)(-?\d+(\.\d+)?,){3,4})-?\d+(\.\d+)?/g, s => s * props.scale);
                                     return `
                                         <i style="height: ${ 16 * props.scale }px; position: relative; overflow: hidden;">
