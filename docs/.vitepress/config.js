@@ -22,7 +22,7 @@ export default defineConfig({
             {
                 text: '组件',
                 items: [
-                    { text: 'barChart', link: '/document/components/barChart' }
+                    { text: 'barChart', link: '/document/components/barChart' },{ text: 'fileIcon', link: '/document/components/fileIcon' },{ text: 'localFieldWidthControl', link: '/document/components/localFieldWidthControl' },{ text: 'multipleLineChart', link: '/document/components/multipleLineChart' }
                 ]
             },
             {

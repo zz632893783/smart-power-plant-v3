@@ -29,8 +29,8 @@ import fs from 'fs';
                 // 获取注释中的组件参考值字段
                 let [example] = attr.match(/(?<=@example ?)[\w\W]+?(?= {4}\*\/)/);
                 example = example.replace(/( +)\*/g, '');
-                // 获取组件中的属性名字段
-                const [attrName] = attr.match(/(?<=\*\/[\w\W]+?\n {4})[a-zA-Z\d]+?(?=:)/);
+                // 获取组件中的属性名字段（兼容 LF / CRLF 两种换行符）
+                const [attrName] = attr.match(/(?<=\*\/[\w\W]*?\n {4})[a-zA-Z\d]+?(?=:)/);
                 // 获取组件中的属性类型字段
                 const [type] = attr.match(/(?<=\*\/[\w\W]+?type: ?\[?)[a-zA-Z\d, ]+(?=\]?,)/);
                 // 获取组件中的属性默认值字段

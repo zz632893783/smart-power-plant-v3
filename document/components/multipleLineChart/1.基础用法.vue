@@ -1,0 +1,21 @@
+<template>
+    <multiple-line-chart class="h-[340px]" ref="chartRef" v-bind="chartOption" />
+</template>
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const chartRef = ref();
+
+const chartOption = {
+    legendNames: ['实时负荷', '出清负荷'],
+    xAxisData: ['1-2月', '1-3月', '1-4月', '1-5月', '1-6月'],
+    seriesData: [
+        { data: [54, 89, 86, 65, 54] },
+        { data: [95, 97, 75, 72, 90] }
+    ],
+    units: ['MW', 'MW']
+};
+
+onMounted(() => chartRef.value.renderChart());
+</script>
+<style lang="scss" scoped></style>

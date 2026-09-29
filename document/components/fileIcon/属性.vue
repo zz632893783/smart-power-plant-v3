@@ -11,36 +11,36 @@
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    baseURL
+                    format
                 </div>
                 <div class="p-4 border-r border-b">
-                    接口 baseURL
+                    图标格式
                 </div>
                 <div class="p-4 border-r border-b">
                     String
                 </div>
                 <div class="p-4 border-r border-b">
-                    'http://192.168.10.100:8080/'
+                    'doc'
                 </div>
                 <div class="p-4 border-r border-b">
-                    'http://192.168.10.100:8080/'
+                    'doc'
                 </div>
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    sectionUniqueName
+                    size
                 </div>
                 <div class="p-4 border-r border-b">
-                    模块名称
+                    图标大小
                 </div>
                 <div class="p-4 border-r border-b">
-                    String
+                    Number, String
                 </div>
                 <div class="p-4 border-r border-b">
-                    'beyondEventList'
+                    64
                 </div>
                 <div class="p-4 border-r border-b">
-                    'beyondEventList'
+                    64
                 </div>
             </div>
     </div>

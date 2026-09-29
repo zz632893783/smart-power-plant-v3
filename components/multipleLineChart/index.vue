@@ -44,8 +44,8 @@ const props = defineProps({
     /**
      * @description 系列数据
      * @example [
-     *     [120, 132, 101, 134, 190, 230, 218],
-     *     [110, 118, 122, 130, 145, 150, 148]
+     *     { data: [120, 132, 101, 134, 190, 230, 218] },
+     *     { data: [110, 118, 122, 130, 145, 150, 148] }
      * ]
      */
     seriesData: {
@@ -275,14 +275,12 @@ const renderChart = () => {
                 splitLine: {
                     lineStyle: {
                         width: 0.5
-                        // color: 'rgba(255, 255, 255, .5)'
                     }
                 },
                 axisLabel: {
                     fontSize: 14,
                     fontWeight: 400,
                     lineHeight: 12
-                    // color: 'rgba(255, 255, 255, 1)'
                 },
                 min: props.min || null,
                 max: props.max || null,
@@ -304,7 +302,8 @@ const renderChart = () => {
                     type: 'line',
                     name: props.legendNames[seriesIndex % props.legendNames.length] || '',
                     data: seriesItem.data || [],
-                    yAxisIndex: seriesItem.yAxisIndex || 0
+                    // yAxisIndex: seriesItem.yAxisIndex || 0
+                    yAxisIndex: 0
                 };
                 seriesOption.smooth = props.smooth;
                 // seriesOption.symbol = 'circle';

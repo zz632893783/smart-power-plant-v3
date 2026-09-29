@@ -11,6 +11,57 @@
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
+                    legendIcon
+                </div>
+                <div class="p-4 border-r border-b">
+                    图表项图标样式 'line'，'circle' 两种
+                </div>
+                <div class="p-4 border-r border-b">
+                    String
+                </div>
+                <div class="p-4 border-r border-b">
+                    'line'
+                </div>
+                <div class="p-4 border-r border-b">
+                    'line'
+                </div>
+            </div>
+            <div class="grid grid-cols-5">
+                <div class="p-4 border-r border-b">
+                    legendNames
+                </div>
+                <div class="p-4 border-r border-b">
+                    图表项名称
+                </div>
+                <div class="p-4 border-r border-b">
+                    Array
+                </div>
+                <div class="p-4 border-r border-b">
+                    []
+                </div>
+                <div class="p-4 border-r border-b">
+                    ['实时负荷', '出清负荷']
+                </div>
+            </div>
+            <div class="grid grid-cols-5">
+                <div class="p-4 border-r border-b">
+                    color
+                </div>
+                <div class="p-4 border-r border-b">
+                    图表项颜色
+                </div>
+                <div class="p-4 border-r border-b">
+                    Array
+                </div>
+                <div class="p-4 border-r border-b">
+                    ['rgba(246, 189, 22, 1)', 'rgba(232, 104, 74, 1)']
+                </div>
+                <div class="p-4 border-r border-b">
+                    ['blue', 'grey']
+                </div>
+            </div>
+            <div class="grid grid-cols-5">
+                <div class="p-4 border-r border-b">
                     xAxisData
                 </div>
                 <div class="p-4 border-r border-b">
@@ -31,7 +82,7 @@
                     seriesData
                 </div>
                 <div class="p-4 border-r border-b">
-                    数据数组
+                    系列数据
                 </div>
                 <div class="p-4 border-r border-b">
                     Array
@@ -40,7 +91,7 @@
                     []
                 </div>
                 <div class="p-4 border-r border-b">
-                    [<br/>&nbsp;&nbsp;&nbsp;&nbsp;[54, 89, 86, 65, 54, 53, 72, 65, 60],<br/>&nbsp;&nbsp;&nbsp;&nbsp;[95, 97, 75, 72, 90, 88, 54, 77, 98]<br/>]
+                    [<br/>&nbsp;&nbsp;&nbsp;&nbsp;{ data: [120, 132, 101, 134, 190, 230, 218] },<br/>&nbsp;&nbsp;&nbsp;&nbsp;{ data: [110, 118, 122, 130, 145, 150, 148] }<br/>]
                 </div>
             </div>
             <div class="grid grid-cols-5">
@@ -54,7 +105,7 @@
                     Object
                 </div>
                 <div class="p-4 border-r border-b">
-                    ({<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: 84,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right: 18,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bottom: 56,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: 56<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+                    ({ top: 20, left: 30, right: 20, bottom: 50 })
                 </div>
                 <div class="p-4 border-r border-b">
                     { top: 84, right: 18, bottom: 56, left: 56 }
@@ -62,10 +113,10 @@
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    legendData
+                    units
                 </div>
                 <div class="p-4 border-r border-b">
-                    legend 数据
+                    y轴单位
                 </div>
                 <div class="p-4 border-r border-b">
                     Array
@@ -74,160 +125,41 @@
                     []
                 </div>
                 <div class="p-4 border-r border-b">
-                    ['统计金额', '开票金额']
+                    ['%', '千瓦时']
                 </div>
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    yAxisName
+                    markLine
                 </div>
                 <div class="p-4 border-r border-b">
-                    y轴单位
-                </div>
-                <div class="p-4 border-r border-b">
-                    String
-                </div>
-                <div class="p-4 border-r border-b">
-                    ''
-                </div>
-                <div class="p-4 border-r border-b">
-                    '万元'
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    showCount
-                </div>
-                <div class="p-4 border-r border-b">
-                    最多显示的数量（实际显示数量会根据输入值调整）
-                </div>
-                <div class="p-4 border-r border-b">
-                    Number
-                </div>
-                <div class="p-4 border-r border-b">
-                    7
-                </div>
-                <div class="p-4 border-r border-b">
-                    4
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    dataZoomType
-                </div>
-                <div class="p-4 border-r border-b">
-                    何种方式拖动 inside 内容区域拖动，slider 滑块拖动
-                </div>
-                <div class="p-4 border-r border-b">
-                    String
-                </div>
-                <div class="p-4 border-r border-b">
-                    'inside'
-                </div>
-                <div class="p-4 border-r border-b">
-                    'slider'
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    dataZoomBottom
-                </div>
-                <div class="p-4 border-r border-b">
-                    当 dataZoomType 为 slider 时，拖动区域距离底部的距离
-                </div>
-                <div class="p-4 border-r border-b">
-                    Number
-                </div>
-                <div class="p-4 border-r border-b">
-                    0
-                </div>
-                <div class="p-4 border-r border-b">
-                    12
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    showLegend
-                </div>
-                <div class="p-4 border-r border-b">
-                    是否显示 legend
-                </div>
-                <div class="p-4 border-r border-b">
-                    Boolean
-                </div>
-                <div class="p-4 border-r border-b">
-                    true
-                </div>
-                <div class="p-4 border-r border-b">
-                    false
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    tooltipFormatter
-                </div>
-                <div class="p-4 border-r border-b">
-                    自定义 tooltip 的格式，支持模板字符串或函数
-                </div>
-                <div class="p-4 border-r border-b">
-                    Function, String
-                </div>
-                <div class="p-4 border-r border-b">
-                    ''
-                </div>
-                <div class="p-4 border-r border-b">
-                    function (...params) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '返回自定义格式'<br/>}
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    legendIcon
-                </div>
-                <div class="p-4 border-r border-b">
-                    legend 图表，支持字符串或数组
-                </div>
-                <div class="p-4 border-r border-b">
-                    String, Array
-                </div>
-                <div class="p-4 border-r border-b">
-                    ['rect']
-                </div>
-                <div class="p-4 border-r border-b">
-                    ['rect']
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    color
-                </div>
-                <div class="p-4 border-r border-b">
-                    图表项颜色
-                </div>
-                <div class="p-4 border-r border-b">
-                    String, Array
-                </div>
-                <div class="p-4 border-r border-b">
-                    ['blue', 'grey']
-                </div>
-                <div class="p-4 border-r border-b">
-                    ['blue', 'grey']
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    tooltipTitle
-                </div>
-                <div class="p-4 border-r border-b">
-                    tooltip 标题
+                    标记线
                 </div>
                 <div class="p-4 border-r border-b">
                     Array
                 </div>
                 <div class="p-4 border-r border-b">
-                    null
+                    []
                 </div>
                 <div class="p-4 border-r border-b">
-                    ['标题A']
+                    [<br/>&nbsp;&nbsp;&nbsp;&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: 134,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yAxisIndex: 0,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: '#33FFBB'<br/>&nbsp;&nbsp;&nbsp;&nbsp;},<br/>&nbsp;&nbsp;&nbsp;&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: 166,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yAxisIndex: 0,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: '#F74768'<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>]
+                </div>
+            </div>
+            <div class="grid grid-cols-5">
+                <div class="p-4 border-r border-b">
+                    smooth
+                </div>
+                <div class="p-4 border-r border-b">
+                    是否平滑
+                </div>
+                <div class="p-4 border-r border-b">
+                    Boolean, Number
+                </div>
+                <div class="p-4 border-r border-b">
+                    false
+                </div>
+                <div class="p-4 border-r border-b">
+                    true
                 </div>
             </div>
             <div class="grid grid-cols-5">
@@ -249,36 +181,36 @@
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    dataZoomStartAtEnd
+                    xAxisHighlightAreaColor
                 </div>
                 <div class="p-4 border-r border-b">
-                    从末尾开始显示图表
+                    高亮区域的索引
                 </div>
                 <div class="p-4 border-r border-b">
-                    Boolean
+                    String
                 </div>
                 <div class="p-4 border-r border-b">
-                    true
+                    'rgb(253, 226, 226)'
                 </div>
                 <div class="p-4 border-r border-b">
-                    false
+                    [2, 4]
                 </div>
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    zoomLock
+                    yAxisName
                 </div>
                 <div class="p-4 border-r border-b">
-                    是否锁定选择区域的大小
+                    y轴单位
                 </div>
                 <div class="p-4 border-r border-b">
-                    Boolean
+                    String, Array
                 </div>
                 <div class="p-4 border-r border-b">
-                    false
+                    ['']
                 </div>
                 <div class="p-4 border-r border-b">
-                    true
+                    ['亿元', '%']
                 </div>
             </div>
             <div class="grid grid-cols-5">
@@ -300,40 +232,6 @@
             </div>
             <div class="grid grid-cols-5">
                 <div class="p-4 border-r border-b">
-                    barBorderRadius
-                </div>
-                <div class="p-4 border-r border-b">
-                    圆柱的圆角
-                </div>
-                <div class="p-4 border-r border-b">
-                    Number, Array
-                </div>
-                <div class="p-4 border-r border-b">
-                    [0]
-                </div>
-                <div class="p-4 border-r border-b">
-                    [4, 4, 0, 0]
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
-                    tooltipConfine
-                </div>
-                <div class="p-4 border-r border-b">
-                    是否将 tooltip 框限制在图表的区域内
-                </div>
-                <div class="p-4 border-r border-b">
-                    Boolean
-                </div>
-                <div class="p-4 border-r border-b">
-                    true
-                </div>
-                <div class="p-4 border-r border-b">
-                    false
-                </div>
-            </div>
-            <div class="grid grid-cols-5">
-                <div class="p-4 border-r border-b">
                     beforeSetOption
                 </div>
                 <div class="p-4 border-r border-b">
@@ -346,7 +244,7 @@
                     null
                 </div>
                 <div class="p-4 border-r border-b">
-                    function (option, chart) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '执行对 option 的修改，绑定自定义事件等'<br/>}
+                    function (option, chart) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '执行对 option 的修改，绑定自定义事件等'<br/>}
                 </div>
             </div>
             <div class="grid grid-cols-5">
@@ -363,7 +261,7 @@
                     null
                 </div>
                 <div class="p-4 border-r border-b">
-                    function (option, chart) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '执行对 option 的修改，绑定自定义事件等'<br/>}
+                    function (option, chart) {<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '执行对 option 的修改，绑定自定义事件等'<br/>}
                 </div>
             </div>
     </div>
